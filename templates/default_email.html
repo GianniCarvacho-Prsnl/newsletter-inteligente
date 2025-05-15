@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ newsletter_title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        .introduction {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+        }
+        .topic {
+            margin-bottom: 40px;
+        }
+        .topic-header {
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .topic-title {
+            color: #2980b9;
+            font-size: 1.4em;
+            margin: 0;
+        }
+        .topic-summary {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .article {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .article-title {
+            color: #34495e;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .article-summary {
+            margin-bottom: 10px;
+        }
+        .article-relevance {
+            font-size: 0.9em;
+            color: #16a085;
+            margin-bottom: 10px;
+        }
+        .article-source {
+            font-size: 0.8em;
+            color: #7f8c8d;
+        }
+        .article-source a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        .article-source a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            text-align: center;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ newsletter_title }}</h1>
+        <div class="date">{{ date }}</div>
+    </div>
+    
+    <div class="introduction">
+        <p>Hola {{ user_name }},</p>
+        <p>{{ introduction }}</p>
+    </div>
+    
+    {% for topic in topics %}
+    <div class="topic">
+        <div class="topic-header">
+            <h2 class="topic-title">{{ topic.name }}</h2>
+        </div>
+        
+        <div class="topic-summary">
+            <p>{{ topic.summary }}</p>
+        </div>
+        
+        {% for article in topic.articles %}
+        <div class="article">
+            <div class="article-title">{{ article.title }}</div>
+            <div class="article-summary">{{ article.summary }}</div>
+            {% if article.relevance %}
+            <div class="article-relevance">Relevancia: {{ article.relevance }}</div>
+            {% endif %}
+            <div class="article-source">
+                Fuente: {{ article.source }} - 
+                <a href="{{ article.url }}" target="_blank">Leer más</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    
+    <div class="footer">
+        <p>¡Gracias por leer tu newsletter personalizado!</p>
+        <p>Recibe este resumen diariamente según tus intereses.</p>
+    </div>
+</body>
+</html> 
